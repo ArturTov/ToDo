@@ -7,7 +7,7 @@ import {
   setItem,
 } from "../../redux/actions/itemActions";
 
-export const ToDo = ({ id, name, index, children }) => {
+export const ToDo = ({ id, name, index, children, className = "" }) => {
   const [isOpenchangeIten, setISOpenchangeModal] = useState(false);
   const [openNewItem, setOpenNewItem] = useState(false);
   const [openChildren, setOpenChildren] = useState(false);
@@ -16,7 +16,8 @@ export const ToDo = ({ id, name, index, children }) => {
   const dispatch = useDispatch();
   return (
     <>
-      <div className="w-full h-12 shadow-light px-2 hover:bg-slate-300 bg-slate-400 flex justify-between items-center">
+      <div
+        className={`w-full h-12 shadow-light px-2 hover:bg-slate-300 bg-slate-400 flex justify-between items-center ${className}`}>
         {isOpenchangeIten ? (
           <CoustmInput
             value={changeVlaue}
@@ -33,9 +34,11 @@ export const ToDo = ({ id, name, index, children }) => {
             {Array.isArray(children) && (
               <span
                 onClick={() => {
-                  setOpenChildren(true);
+                  setOpenChildren(!openChildren);
                 }}
-                className="cursor-pointer">
+                className={`cursor-pointer mb-[7px] ${
+                  openChildren && "rotate-180"
+                }`}>
                 <svg
                   className="w-[15px] h-[15px]  text-gray-800 dark:text-white"
                   aria-hidden="true"
@@ -120,7 +123,7 @@ export const ToDo = ({ id, name, index, children }) => {
         </div>
       </div>
       {Array.isArray(children) && openChildren && (
-        <div className=" flex flex-col gap-3">
+        <div className=" flex flex-col gap-3 justify-end">
           {children.map((el, index) => (
             <ToDo
               key={el.id}

@@ -2,54 +2,52 @@ import { actions_types } from "../constants/action_type";
 const id = () => {
   return Math.random().toString();
 };
+const initialState = {
+  items: [
+    {
+      id: 101,
+      name: "Shirts",
+      parent_id: null,
+    },
+    {
+      id: 102,
+      name: "Scarves",
+      parent_id: null,
+    },
+    {
+      id: 103,
+      name: "Jeans",
+      parent_id: null,
+    },
+    {
+      id: 1011,
+      name: "Long Sleeve",
+      parent_id: 101,
+    },
+    {
+      id: 1012,
+      name: "Short Sleeve",
+      parent_id: 1011,
+    },
+    {
+      id: 1031,
+      name: "Wide leg",
+      parent_id: 103,
+    },
+    {
+      id: 10121,
+      name: "Graphic tee",
+      parent_id: 1012,
+    },
+    {
+      id: 10122,
+      name: "Button down",
+      parent_id: 1012,
+    },
+  ],
+};
 
-export const toDoReducer = (
-  state = {
-    items: [
-      {
-        id: 101,
-        name: "Shirts",
-        parent_id: null,
-      },
-      {
-        id: 102,
-        name: "Scarves",
-        parent_id: null,
-      },
-      {
-        id: 103,
-        name: "Jeans",
-        parent_id: null,
-      },
-      {
-        id: 1011,
-        name: "Long Sleeve",
-        parent_id: 101,
-      },
-      {
-        id: 1012,
-        name: "Short Sleeve",
-        parent_id: 1011,
-      },
-      {
-        id: 1031,
-        name: "Wide leg",
-        parent_id: 103,
-      },
-      {
-        id: 10121,
-        name: "Graphic tee",
-        parent_id: 1012,
-      },
-      {
-        id: 10122,
-        name: "Button down",
-        parent_id: 1012,
-      },
-    ],
-  },
-  { type, payload }
-) => {
+export const toDoReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions_types.SET_TODO:
       return {
@@ -96,11 +94,6 @@ export const toDoReducer = (
             .filter((el) => el.id !== payload)
             .filter((el) => el.parent_id !== payload),
         ],
-      };
-    case actions_types.ADD:
-      return {
-        ...state,
-        items: payload,
       };
     default:
       return state;

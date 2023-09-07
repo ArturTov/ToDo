@@ -24,9 +24,3 @@ export const setDeleteItem = (payload) => {
     payload,
   };
 };
-export const add = (payload) => {
-  return {
-    type: actions_types.ADD,
-    payload,
-  };
-};
